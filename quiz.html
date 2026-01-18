@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="parcours.html">Parcours</a></li>
+            <li><a href="competences.html">Compétences</a></li>
+            <li><a href="éxperience.html">Expériences</a></li>
+            <li><a href="Evenements.html">Evenements</a></li>
+            <li><a href="Matieres.html">Matieres</a></li>
+            <li><a href="passions.html">Passions</a></li>
+            <li><a class="active" href="quiz.html">Quiz</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="temoignage.html">Témoignage</a></li>
+        </ul>
+    </nav>
+    <main class="quiz">
+        <header>
+            <h1>Quiz : Développement Web</h1>
+            <p>Repondez aux questions puis cliquez sur Valider</p>
+        </header>
+        <form id="quiz">
+            <div class="q">
+                <p>1. Que signifie HTML?</p>
+                <label><input type="radio" name="q1" value="1">a. Hyper Text Markup Language</label><br>
+                <label><input type="radio" name="q1" value="0"> b. High Text Machine Language </label><br>
+                <label><input type="radio" name="q1" value="0">c. Hyperlink Text Modern Language </label>
+            </div>
+            <div class="q">
+                <p>2. À quoi sert le CSS ?</p>
+                <label><input type="radio" name="q2" value="0"> a.Créer des bases de données</label><br>
+                <label><input type="radio" name="q2" value="1"> b.styliser les pages web</label>
+            </div>
+            <div class="q">
+                <p>3.Quelle balise HTML est utilisée pour un titre principal ?</p>
+                <label><input type="radio" name="q3" value="0"> a. p  </label><br>
+                <label><input type="radio" name="q3" value="1"> b. h1 </label><br>
+                <label><input type="radio" name="q3" value="0"> c. div </label>
+            </div>
+            <div class="q">
+                <p>4.À quoi sert la balise  img ?</p>
+                <label><input type="radio" name="q4" value="0"> a.Ajouter un lien </label><br>
+                <label><input type="radio" name="q4" value="0"> b.Ajouter un tableau</label><br>
+                <label><input type="radio" name="q4" value="1"> c.Ajouter une image</label>
+            </div>
+            <div class="q">
+                <p>5.Quel attribut HTML est obligatoire pour une image ?</p>
+                <label><input type="radio" name="q5" value="1"> a.src</label><br>
+                <label><input type="radio" name="q5" value="0"> b.alt</label><br>
+                <label><input type="radio" name="q5" value="0"> c.href</label>
+
+            </div>
+            <div class="q">
+                <p>6. Quelle balise crée une liste ?</p>
+                <label><input type="radio" name="q6" value="1"> a. ul </label><br>
+                <label><input type="radio" name="q6" value="0"> b. p </label>
+            </div>
+            <div class="q">
+                <p>7.Que signifie CSS ?</p>
+                <label><input type="radio" name="q7" value="1"> a.Cascading Style Sheets</label><br>
+                <label><input type="radio" name="q7" value="0"> b.Creative Style System</label><br>
+                <label><input type="radio" name="q7" value="0"> c.Computer Style Sheets</label>
+
+            </div>
+            <div class="q">
+                <p>8.À quoi sert la balise p ?</p>
+                <label><input type="radio" name="q8" value="1"> a.Créer un paragraphe</label><br>
+                <label><input type="radio" name="q8" value="0"> b.Créer un titre</label><br>
+                <label><input type="radio" name="q8" value="0"> c.Créer une image</label>
+
+            </div>
+             <div class="q">
+                <p>9. HTML est :</p>
+                <label><input type="radio" name="q9" value="0"> a.Un langage de programmation</label><br>
+                <label><input type="radio" name="q9" value="1"> b. Un langage de balisage</label>
+            </div>
+            <div class="q">
+                <p>10. Quelle balise définit un lien ?</p>
+                <label><input type="radio" name="q10" value="1"> a. a  </label><br>
+                <label><input type="radio" name="q10" value="0"> b. link </label>
+            </div>
+            <input type="button" value="Valider" onclick="corrigequiz()">
+            
+
+
+
+        </form>
+        <div id="resultat"></div>
+
+    </main>
+   
+
+    <script>
+function corrigequiz() {
+    var score = 0;
+    var total = 10;
+    var bonnesReponses = {
+        q1: "a. Hyper Text Markup Language",
+        q2: "b. styliser les pages web",
+        q3: "b. h1",
+        q4: "c. Ajouter une image",
+        q5: "a. src",
+        q6: "a. ul",
+        q7: "a. Cascading Style Sheets",
+        q8: "a. Créer un paragraphe",
+        q9: "b. Un langage de balisage",
+        q10:"a. a"
+    };
+    
+    var resultatText = "";
+
+    for (var i = 1; i <= total; i++) {
+        var choix = document.getElementsByName("q" + i);
+        var trouve = false;  
+
+        for (var j = 0; j < choix.length; j++) {
+            if (choix[j].checked) {
+                trouve = true;
+               
+                if (choix[j].value == "correct") {
+                    score++;
+                    resultatText += "<p>Question " + i + ": ✅ Correct !</p>";
+                } else {
+                    resultatText += "<p>Question " + i + ": ❌ Incorrect. La bonne réponse est <strong>" + bonnesReponses["q"+i] + "</strong></p>";
+                }
+                break; 
+            }
+        }
+
+        if (!trouve) {
+            resultatText += "<p>Question " + i + ": ⚠️ Vous n'avez pas répondu. La bonne réponse est <strong>" + bonnesReponses["q"+i] + "</strong></p>";
+        }
+    }
+
+   document.getElementById("resultat").innerHTML =
+        "<h2>Votre note : " + score + " / " + total + "</h2>" + resultatText;
+        }
+</script>
+
+            
+    
+</body>
+</html>
